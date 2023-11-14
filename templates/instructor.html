@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ instructor[0] }}'s Details</title>
+    <style>
+
+        h2 {
+            text-align: center;
+            color: blue;
+            padding-top: 15px;
+        }
+        
+        /* Apply some basic styles to the table */
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            font-size: 16px;
+            table-layout: fixed;
+            
+        }
+        
+        /* Style the table header */
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #4CAF50;          /* Green background color for headers */
+            color: white;
+        }
+        
+        /* Add hover effect to table rows */
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        /* Add zebra striping for better readability */
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        /* Style the first column (e.g., serial numbers or icons) differently */
+        td:first-child {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        /* Apply responsive design for smaller screens */
+        @media screen and (max-width: 600px) {
+            table {
+                border: 1px solid #ddd;
+            }
+            th, td {
+                padding: 5px;
+                text-align: center;
+            }
+            /* Hide the table headers in small screens */
+            th {
+                display: none;
+            }
+            tr {
+                border-bottom: 2px solid #ddd;
+                display: block;
+                margin-bottom: 12px;
+            }
+            td:first-child {
+                font-weight: bold;
+                color: #333;
+            }
+        }
+
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+
+<body>
+
+    <h2>Instructor Details</h2>
+
+    <table>
+        <tr>
+            <th>Instructor Name</th>
+            <td>{{ instructor[0] }}</td>
+        </tr>
+        <tr>
+            <th>Teach Courses</th>
+            <td>
+                {% for course in teach_courses %}
+                    <a href="{{ url_for('course_details', course_id=course[0]) }}">{{ course[1] }}</a>
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+        
+</body>
+</html>

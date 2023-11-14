@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Details</title>
+</head>
+<body>
+    <h1>Course Details</h1>
+    <h2>Course: {{ course_id }}</h2>
+    <h3>Prerequisites:</h3>
+    <ul>
+        {% for prerequisite in prerequisites %}
+            <li>{{ prerequisite.Prerequisite_Number }}</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>

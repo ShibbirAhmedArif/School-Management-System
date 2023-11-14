@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Grades</title>
+    <script>
+        {% autoescape off %}
+            var student = {{ student | tojson | safe }};
+            var grades = {{ grades | tojson | safe }};
+		{% endautoescape %}
+        console.log(student);
+        console.log(grades);
+
+        function init() {
+
+            for (let i = 0; i < grades.length; i++) {
+                let grade = grades[i];
+                console.log(grade);
+                document.getElementById("student_grade_table").innerHTML += `
+                <tr>
+                    
+                    <td>${grade[0]}</td>
+                    <td><a href="/courses/${grade[1]}">${grade[1]}</a></td>
+                    <td>${grade[2]}</td>
+                    <td><a href="/instructors/${grade[3]}">${grade[3]}</td>
+                    <td>${grade[4]}</td>
+                    <td>${grade[5]}</td>
+                    <td>${grade[6]}</td>
+                    <td>${grade[7]}</td>
+                </tr>
+                `;
+            }
+
+        }
+
+    </script>
+    <style>
+
+        h2 {
+            text-align: center;
+            color: blue;
+            padding-top: 15px;
+        }
+        
+        /* Apply some basic styles to the table */
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            font-size: 16px;
+            table-layout: fixed;
+            
+        }
+        
+        /* Style the table header */
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #4CAF50;          /* Green background color for headers */
+            color: white;
+        }
+        
+        /* Add hover effect to table rows */
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        /* Add zebra striping for better readability */
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        /* Style the first column (e.g., serial numbers or icons) differently */
+        td:first-child {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        /* Apply responsive design for smaller screens */
+        @media screen and (max-width: 600px) {
+            table {
+                border: 1px solid #ddd;
+            }
+            th, td {
+                padding: 10px;
+                text-align: center;
+            }
+            /* Hide the table headers in small screens */
+            th {
+                display: none;
+            }
+            tr {
+                border-bottom: 2px solid #ddd;
+                display: block;
+                margin-bottom: 12px;
+            }
+            td:first-child {
+                font-weight: bold;
+                color: #333;
+            }
+        }
+
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body onload = "init()">
+  
+    <h2>Grades of the student: {{ student[0] }}</h2>
+    <table id = "student_grade_table">
+        <tr>
+            <th>Course Name</th>
+            <th>Course Number</th>
+            <th>Section Identifier</th>
+            <th>Instructor</th>
+            <th>Credit Hours</th>
+            <th>Semester</th>
+            <th>Year</th>
+            <th>Grade</th>
+        </tr>
+    </table>
+
+</body>
+</html>
